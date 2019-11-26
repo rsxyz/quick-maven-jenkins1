@@ -5,19 +5,18 @@ pipeline {
         maven 'maven3'
     }
     stages {
-        stage('Install') {
+        stage('install and sonar parallel') {
             steps {
-                sh "mvn clean test"
+                parallel(install: {
+                    sh "mvn clean test"
+                }, sonar: {
+                    sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
+                })
             }
             post {
                 always {
                     junit '**/target/*-reports/TEST-*.xml'
                 }
-            }
-        }
-        stage('Sonar') {
-            steps {
-                sh "mvn sonar:sonar -Dsonar.host.url=${env.SONARQUBE_HOST}"
             }
         }
     }
