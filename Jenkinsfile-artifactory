@@ -24,7 +24,7 @@ pipeline {
             steps {
                 rtServer (
                     id: "ARTIFACTORY_SERVER",
-                    url: "${env.SONARQUBE_HOST}",
+                    url: "${env.ARTIFACTORY_HOST}",
                     credentialsId: "artifactory-login"
                 )
 
