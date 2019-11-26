@@ -25,7 +25,7 @@ pipeline {
                 rtServer (
                     id: "ARTIFACTORY_SERVER",
                     url: "${env.SONARQUBE_HOST}",
-                    credentialsId: artifactory-login
+                    credentialsId: "artifactory-login"
                 )
 
                 rtMavenDeployer (
@@ -47,7 +47,7 @@ pipeline {
         stage ('Exec Maven') {
             steps {
                 rtMavenRun (
-                    tool: maven3, // Tool name from Jenkins configuration
+                    tool: "maven3", // Tool name from Jenkins configuration
                     pom: 'quick/pom.xml',
                     goals: 'clean install',
                     deployerId: "MAVEN_DEPLOYER",
