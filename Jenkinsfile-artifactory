@@ -19,15 +19,12 @@ pipeline {
                 }
             }
         }
-http://192.168.1.15:8081/artifactory
-
-http://192.168.1.15:8081/artifactory
 
         stage ('Artifactory configuration') {
             steps {
                 rtServer (
                     id: "ARTIFACTORY_SERVER",
-                    url: ${env.ARTIFACTORY_HOST},
+                    url: "${env.SONARQUBE_HOST}",
                     credentialsId: artifactory-login
                 )
 
